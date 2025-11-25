@@ -26,13 +26,7 @@ export default function StudentTable({ students }: StudentTableProps) {
 
     if (students.length === 0) {
         return (
-            <div style={{
-                textAlign: 'center',
-                padding: '80px 20px',
-                backgroundColor: 'white',
-                borderRadius: '8px',
-                border: '1px solid #e5e7eb'
-            }}>
+            <div className="loading-container" style={{ backgroundColor: 'white' }}>
                 <div style={{
                     width: '64px',
                     height: '64px',
@@ -58,15 +52,9 @@ export default function StudentTable({ students }: StudentTableProps) {
     }
 
     return (
-        <div style={{
-            maxHeight: '800px',
-            overflowY: 'auto',
-            overflowX: 'auto',
-            borderRadius: '12px',
-            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
-        }}>
+        <div className="table-container">
             <table className="data-table">
-                <thead style={{ position: 'sticky', top: 0, zIndex: 10 }}>
+                <thead>
                     <tr>
                         <th>S. No</th>
                         <th>Registration No.</th>

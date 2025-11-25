@@ -60,52 +60,25 @@ export default function Home() {
   ).length;
 
   return (
-    <main style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(180deg, #1a0b2e 0%, #16213e 50%, #0f1729 100%)',
-      backgroundAttachment: 'fixed'
-    }}>
+    <main className="main-layout">
       <Header />
 
       {/* Convocation 2025 Banner */}
-      <div style={{
-        position: 'relative',
-        width: '100%',
-        height: '300px',
-        overflow: 'hidden',
-        borderBottom: '4px solid #1e3a8a'
-      }}>
+      <div className="banner-container">
         <img
           src="/convocation-banner.png"
           alt="9th Annual Convocation 2025 - CA SAB Campus"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center'
-          }}
+          className="banner-image"
         />
       </div>
-      <div className="container" style={{ paddingTop: '32px', paddingBottom: '32px' }}>
+      <div className="container content-container">
         {/* Page Header */}
-        <div style={{
-          marginBottom: '24px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '16px'
-        }}>
+        <div className="page-header">
           <div>
-            <h1 style={{
-              fontSize: '24px',
-              fontWeight: '700',
-              color: '#f0f6fc',
-              marginBottom: '8px'
-            }}>
+            <h1 className="page-title">
               Student Document Submission Status
             </h1>
-            <p style={{ fontSize: '14px', color: '#8b949e' }}>
+            <p className="page-description">
               Track and monitor document submission progress for all students
             </p>
           </div>
@@ -114,32 +87,7 @@ export default function Home() {
             href="https://sablms.casrilanka.com/course/view.php?id=3128"
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              padding: '12px 24px',
-              backgroundColor: '#61067cff',
-              border: '2px solid rgba(255, 255, 255, 0.3)',
-              borderRadius: '8px',
-              color: '#ffffff',
-              fontSize: '14px',
-              fontWeight: '600',
-              textDecoration: 'none',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              transition: 'all 0.2s ease',
-              cursor: 'pointer',
-              whiteSpace: 'nowrap'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#7a0a9fff';
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(97, 6, 124, 0.4)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#61067cff';
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
+            className="submit-btn"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -152,22 +100,10 @@ export default function Home() {
         </div>
 
         {/* Search & Filters */}
-        <div style={{
-          backgroundColor: 'rgba(255, 255, 255, 0.95)',
-          border: '1px solid #e5e7eb',
-          borderRadius: '8px',
-          padding: '20px',
-          marginBottom: '24px'
-        }}>
-          <div style={{ position: 'relative', maxWidth: '400px' }}>
-            <div style={{
-              position: 'absolute',
-              left: '12px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              pointerEvents: 'none'
-            }}>
-              <svg style={{ width: '18px', height: '18px', color: '#9ca3af' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="search-container">
+          <div className="search-wrapper">
+            <div className="search-icon">
+              <svg style={{ width: '18px', height: '18px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
@@ -183,13 +119,7 @@ export default function Home() {
 
         {/* Data Table */}
         {error ? (
-          <div style={{
-            padding: '80px 20px',
-            textAlign: 'center',
-            backgroundColor: 'rgba(255, 255, 255, 0.95)',
-            borderRadius: '8px',
-            border: '1px solid #fee2e2'
-          }}>
+          <div className="error-container">
             <div style={{ marginBottom: '16px', color: '#dc2626' }}>
               <svg style={{ width: '48px', height: '48px', margin: '0 auto' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -203,37 +133,14 @@ export default function Home() {
             </p>
             <button
               onClick={fetchData}
-              style={{
-                padding: '10px 20px',
-                backgroundColor: '#3b82f6',
-                color: 'white',
-                border: 'none',
-                borderRadius: '6px',
-                fontSize: '14px',
-                fontWeight: '600',
-                cursor: 'pointer'
-              }}
+              className="retry-btn"
             >
               Retry
             </button>
           </div>
         ) : isLoading ? (
-          <div style={{
-            padding: '80px 20px',
-            textAlign: 'center',
-            backgroundColor: 'rgba(255, 255, 255, 0.95)',
-            borderRadius: '8px',
-            border: '1px solid #e5e7eb'
-          }}>
-            <div style={{
-              width: '48px',
-              height: '48px',
-              border: '4px solid #e5e7eb',
-              borderTopColor: '#3b82f6',
-              borderRadius: '50%',
-              margin: '0 auto',
-              animation: 'spin 1s linear infinite'
-            }}></div>
+          <div className="loading-container">
+            <div className="loading-spinner"></div>
             <p style={{ marginTop: '16px', fontSize: '14px', color: '#6b7280' }}>
               Loading student data...
             </p>
@@ -244,41 +151,36 @@ export default function Home() {
 
         {/* Statistics Cards - Bottom */}
         {!isLoading && !error && (
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: '16px',
-            marginTop: '32px'
-          }}>
+          <div className="stats-grid">
             <div className="stats-card">
-              <div style={{ fontSize: '12px', fontWeight: '600', color: '#94a3b8', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <div className="stats-label">
                 Total Students
               </div>
-              <div style={{ fontSize: '32px', fontWeight: '700', color: '#f8fafc' }}>
+              <div className="stats-value">
                 {students.length}
               </div>
             </div>
             <div className="stats-card">
-              <div style={{ fontSize: '12px', fontWeight: '600', color: '#94a3b8', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <div className="stats-label">
                 Fully Approved
               </div>
-              <div style={{ fontSize: '32px', fontWeight: '700', color: '#34d399' }}>
+              <div className="stats-value stats-value-success">
                 {approvedCount}
               </div>
             </div>
             <div className="stats-card">
-              <div style={{ fontSize: '12px', fontWeight: '600', color: '#94a3b8', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <div className="stats-label">
                 Pending Review
               </div>
-              <div style={{ fontSize: '32px', fontWeight: '700', color: '#fbbf24' }}>
+              <div className="stats-value stats-value-warning">
                 {pendingCount}
               </div>
             </div>
             <div className="stats-card">
-              <div style={{ fontSize: '12px', fontWeight: '600', color: '#94a3b8', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <div className="stats-label">
                 Completion Rate
               </div>
-              <div style={{ fontSize: '32px', fontWeight: '700', color: '#60a5fa' }}>
+              <div className="stats-value stats-value-info">
                 {students.length > 0 ? Math.round((approvedCount / students.length) * 100) : 0}%
               </div>
             </div>
