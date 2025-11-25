@@ -95,6 +95,10 @@ function normalizeStatus(value: string): DocumentStatus['status'] {
 
     const normalized = value.toLowerCase().trim();
 
+    if (normalized.includes('payment') && normalized.includes('received')) return 'Payment received';
+    if (normalized.includes('confirm')) return 'Confirmed';
+    if (normalized.includes('not') && normalized.includes('paid')) return 'Not Paid';
+
     if (normalized.includes('submit') && !normalized.includes('not')) return 'Submitted';
     if (normalized.includes('pending')) return 'Pending';
     if (normalized.includes('approve')) return 'Approved';

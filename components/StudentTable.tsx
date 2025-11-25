@@ -13,13 +13,16 @@ export default function StudentTable({ students }: StudentTableProps) {
             case 'submitted': return 'status-submitted';
             case 'pending': return 'status-pending';
             case 'rejected': return 'status-rejected';
+            case 'payment received': return 'status-payment-received';
+            case 'confirmed': return 'status-confirmed';
+            case 'not paid': return 'status-not-paid';
             default: return 'status-not-submitted';
         }
     };
 
     const calculateProgress = (student: Student) => {
         const completed = student.documents.filter(
-            doc => doc.status === 'Submitted' || doc.status === 'Approved'
+            doc => doc.status === 'Submitted' || doc.status === 'Approved' || doc.status === 'Payment received' || doc.status === 'Confirmed'
         ).length;
         return student.documents.length > 0 ? (completed / student.documents.length) * 100 : 0;
     };
