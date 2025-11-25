@@ -65,7 +65,7 @@ export async function fetchStudentData(): Promise<Student[]> {
                 { name: 'SAB Alumni Registration', index: 5 },
                 { name: 'Exit Interview Form', index: 6 },
                 { name: 'Finance Clearance', index: 7 },
-                { name: 'Application Form', index: 8 },
+                { name: 'Convocation Payment', index: 8 },
             ];
 
             for (const doc of documentColumns) {
