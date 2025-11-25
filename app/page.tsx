@@ -150,7 +150,7 @@ export default function Home() {
         )}
 
         {/* Statistics Cards - Bottom */}
-        {!isLoading && !error && (
+        {/* {!isLoading && !error && (
           <div className="stats-grid">
             <div className="stats-card">
               <div className="stats-label">
@@ -185,7 +185,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </main>
   );
