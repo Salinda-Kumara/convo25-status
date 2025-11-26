@@ -62,18 +62,27 @@ export async function fetchStudentData(): Promise<Student[]> {
             // Extract document statuses (columns 4 onwards)
             const documentColumns = [
                 { name: 'Supplication Form', index: 4 },
-                { name: 'SAB Alumni Registration', index: 5 },
+                { name: 'SAB Alumni Registration Form', index: 5 },
                 { name: 'Exit Interview Form', index: 6 },
-                { name: 'Finance Clearance', index: 7 },
+                { name: 'Finance Clearance Form', index: 7 },
                 { name: 'Convocation Payment', index: 8 },
+                { name: 'Participation', index: 9 },
+                { name: 'No of Guests Allowed', index: 10 },
+                { name: 'Cloak Collection', index: 11 },
+                { name: 'Degree Certificate And Transcript', index: 12 },
             ];
 
             for (const doc of documentColumns) {
                 if (row[doc.index] !== undefined) {
-                    const status = normalizeStatus(row[doc.index]);
+                    // For these columns, use raw value instead of normalizing
+                    const rawValueColumns = ['Participation', 'No of Guests Allowed', 'Cloak Collection', 'Degree Certificate And Transcript'];
+                    const status = rawValueColumns.includes(doc.name)
+                        ? (row[doc.index] || 'Not Submitted')
+                        : normalizeStatus(row[doc.index]);
+
                     student.documents.push({
                         name: doc.name,
-                        status: status,
+                        status: status as any,
                         submittedDate: undefined,
                     });
                 }
@@ -95,10 +104,29 @@ function normalizeStatus(value: string): DocumentStatus['status'] {
 
     const normalized = value.toLowerCase().trim();
 
+    // Handle payment-related statuses
     if (normalized.includes('payment') && normalized.includes('received')) return 'Payment received';
-    if (normalized.includes('confirm')) return 'Confirmed';
     if (normalized.includes('not') && normalized.includes('paid')) return 'Not Paid';
 
+    // Handle Participation statuses (in person/Absentia)
+    if (normalized === 'in person' || normalized.includes('in person')) return 'Confirmed';
+    if (normalized === 'absentia' || normalized.includes('absentia')) return 'Confirmed';
+
+    // Handle Cloak Collection (Yes/No)
+    if (normalized === 'yes') return 'Approved';
+    if (normalized === 'no') return 'Pending';
+
+    // Handle Degree Certificate And Transcript (Ready/Not Ready)
+    if (normalized === 'ready') return 'Approved';
+    if (normalized === 'not ready') return 'Pending';
+
+    // Handle No of Guests Allowed (numeric count - treat any number as Confirmed)
+    if (!isNaN(Number(normalized)) && normalized !== '') return 'Confirmed';
+
+    // Handle confirmation statuses
+    if (normalized.includes('confirm')) return 'Confirmed';
+
+    // Handle submission statuses
     if (normalized.includes('submit') && !normalized.includes('not')) return 'Submitted';
     if (normalized.includes('pending')) return 'Pending';
     if (normalized.includes('approve')) return 'Approved';

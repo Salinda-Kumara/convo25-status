@@ -8,16 +8,33 @@ interface StudentTableProps {
 
 export default function StudentTable({ students }: StudentTableProps) {
     const getStatusClass = (status: string) => {
-        switch (status.toLowerCase()) {
-            case 'approved': return 'status-approved';
-            case 'submitted': return 'status-submitted';
-            case 'pending': return 'status-pending';
-            case 'rejected': return 'status-rejected';
-            case 'payment received': return 'status-payment-received';
-            case 'confirmed': return 'status-confirmed';
-            case 'not paid': return 'status-not-paid';
-            default: return 'status-not-submitted';
-        }
+        const normalized = status.toLowerCase();
+
+        // Existing status mappings
+        if (normalized === 'approved') return 'status-approved';
+        if (normalized === 'submitted') return 'status-submitted';
+        if (normalized === 'pending') return 'status-pending';
+        if (normalized === 'rejected') return 'status-rejected';
+        if (normalized === 'payment received') return 'status-payment-received';
+        if (normalized === 'confirmed') return 'status-confirmed';
+        if (normalized === 'not paid') return 'status-not-paid';
+
+        // New raw value mappings
+        // Participation: in person/Absentia -> Confirmed (blue)
+        if (normalized === 'in person' || normalized === 'absentia') return 'status-confirmed';
+
+        // Cloak Collection: Yes -> Approved (green), No -> Pending (yellow)
+        if (normalized === 'yes') return 'status-approved';
+        if (normalized === 'no') return 'status-pending';
+
+        // Degree Certificate: Ready -> Approved (green), Not Ready -> Pending (yellow)
+        if (normalized === 'ready') return 'status-approved';
+        if (normalized === 'not ready') return 'status-pending';
+
+        // No of Guests Allowed: numeric -> Confirmed (blue)
+        if (!isNaN(Number(status)) && status.trim() !== '') return 'status-confirmed';
+
+        return 'status-not-submitted';
     };
 
     const calculateProgress = (student: Student) => {
