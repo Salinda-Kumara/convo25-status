@@ -190,6 +190,12 @@ body {
     align-items: flex-start;
   }
 
+  .page-title {
+    white-space: nowrap;
+    overflow-x: auto;
+    font-size: 20px;
+  }
+
   .submit-btn {
     width: 100%;
     justify-content: center;
@@ -276,7 +282,6 @@ body {
 
 .data-table tbody tr {
   border-bottom: 1px solid #f1f5f9;
-  transition: all 0.2s ease;
 }
 
 .data-table tbody tr:nth-child(even) {
@@ -285,8 +290,6 @@ body {
 
 .data-table tbody tr:hover {
   background-color: #e0f2fe;
-  transform: scale(1.001);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .data-table tbody tr:last-child {
@@ -300,10 +303,151 @@ body {
   border-right: 1px solid #f1f5f9;
   vertical-align: middle;
   word-wrap: break-word;
+  background-color: #ffffff;
 }
 
 .data-table td:last-child {
   border-right: none;
+}
+
+.data-table tbody tr:nth-child(even) td {
+  background-color: #f8fafc;
+}
+
+/* Sticky columns for S. No and Registration No. */
+.data-table th:nth-child(1),
+.data-table th:nth-child(2) {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  will-change: transform;
+}
+
+.data-table th:nth-child(1) {
+  left: 0;
+  min-width: 80px;
+}
+
+.data-table th:nth-child(2) {
+  left: 80px;
+  min-width: 150px;
+  box-shadow: 3px 0 5px -2px rgba(0, 0, 0, 0.2);
+}
+
+.data-table td:nth-child(1),
+.data-table td:nth-child(2) {
+  position: sticky;
+  z-index: 5;
+  background-color: #ffffff;
+  will-change: transform;
+}
+
+.data-table td:nth-child(1) {
+  left: 0;
+  min-width: 80px;
+}
+
+.data-table td:nth-child(2) {
+  left: 80px;
+  min-width: 150px;
+  box-shadow: 3px 0 5px -2px rgba(0, 0, 0, 0.15);
+}
+
+/* Maintain alternating row colors for sticky columns */
+.data-table tbody tr:nth-child(even) td:nth-child(1),
+.data-table tbody tr:nth-child(even) td:nth-child(2) {
+  background-color: #f8fafc;
+}
+
+/* Maintain hover effect for sticky columns */
+.data-table tbody tr:hover td:nth-child(1),
+.data-table tbody tr:hover td:nth-child(2) {
+  background-color: #e0f2fe;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .table-container {
+    max-height: 600px;
+    border-radius: 8px;
+  }
+
+  .data-table th {
+    padding: 12px 14px;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .data-table td {
+    padding: 14px;
+    font-size: 13px;
+  }
+
+  .data-table th:nth-child(1),
+  .data-table td:nth-child(1) {
+    min-width: 60px;
+  }
+
+  .data-table th:nth-child(2) {
+    left: 60px;
+    min-width: 130px;
+  }
+
+  .data-table td:nth-child(2) {
+    left: 60px;
+    min-width: 130px;
+  }
+
+  .status-badge {
+    padding: 5px 10px;
+    font-size: 10px;
+  }
+
+  .progress-container {
+    width: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-container {
+    max-height: 500px;
+    border-radius: 6px;
+  }
+
+  .data-table th {
+    padding: 10px 12px;
+    font-size: 9px;
+  }
+
+  .data-table td {
+    padding: 12px;
+    font-size: 12px;
+  }
+
+  .data-table th:nth-child(1),
+  .data-table td:nth-child(1) {
+    min-width: 50px;
+  }
+
+  .data-table th:nth-child(2) {
+    left: 50px;
+    min-width: 110px;
+  }
+
+  .data-table td:nth-child(2) {
+    left: 50px;
+    min-width: 110px;
+  }
+
+  .status-badge {
+    padding: 4px 8px;
+    font-size: 9px;
+  }
+
+  .progress-container {
+    width: 60px;
+  }
 }
 
 /* Status Badges */
