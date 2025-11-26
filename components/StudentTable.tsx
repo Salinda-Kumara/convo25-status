@@ -38,10 +38,24 @@ export default function StudentTable({ students }: StudentTableProps) {
     };
 
     const calculateProgress = (student: Student) => {
-        const completed = student.documents.filter(
+        // Only consider these columns for progress calculation
+        const progressColumns = [
+            'Supplication Form',
+            'SAB Alumni Registration Form',
+            'Exit Interview Form',
+            'Finance Clearance Form',
+            'Convocation Payment'
+        ];
+
+        const relevantDocs = student.documents.filter(doc =>
+            progressColumns.includes(doc.name)
+        );
+
+        const completed = relevantDocs.filter(
             doc => doc.status === 'Submitted' || doc.status === 'Approved' || doc.status === 'Payment received' || doc.status === 'Confirmed'
         ).length;
-        return student.documents.length > 0 ? (completed / student.documents.length) * 100 : 0;
+
+        return relevantDocs.length > 0 ? (completed / relevantDocs.length) * 100 : 0;
     };
 
     if (students.length === 0) {
@@ -80,7 +94,7 @@ export default function StudentTable({ students }: StudentTableProps) {
                         <th>Registration No.</th>
                         <th>Name with Initials</th>
                         <th>Name Appeared in the Degree Certificate</th>
-                        <th>Progress</th>
+                        <th>Submission Progress</th>
                         {students[0]?.documents.map((doc, index) => (
                             <th key={index}>{doc.name}</th>
                         ))}
