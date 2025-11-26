@@ -228,7 +228,7 @@ body {
 .table-container {
   max-height: 800px;
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: auto;
   border-radius: 12px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
@@ -239,7 +239,7 @@ body {
   border-collapse: separate;
   border-spacing: 0;
   border: none;
-  table-layout: fixed;
+  table-layout: auto;
 }
 
 .data-table thead {
@@ -259,8 +259,6 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   white-space: normal;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -302,7 +300,6 @@ body {
   border-right: 1px solid #f1f5f9;
   vertical-align: middle;
   word-wrap: break-word;
-  overflow-wrap: break-word;
 }
 
 .data-table td:last-child {
