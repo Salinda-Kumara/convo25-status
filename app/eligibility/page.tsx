@@ -115,7 +115,7 @@ export default function EligibilityPage() {
                     <div>
                         <h1 className="page-title">Convocation Eligibility Check</h1>
                         <p className="page-description">
-                            Enter your Registration Number or Name to check your eligibility for Convocation 2025.
+                            If your details are not found in the search results, you are not eligible for the Convocation 2025.
                         </p>
                     </div>
                 </div>
@@ -230,6 +230,9 @@ export default function EligibilityPage() {
                                 <span className="detail-label">Class Award:</span>
                                 <span className="detail-value highlight">{matchedStudent.classAward}</span>
                             </div>
+                        </div>
+                        <div style={{ marginTop: '20px', fontSize: '12px', fontStyle: 'italic', color: 'red', textAlign: 'center' }}>
+                            *This is a System-generated report. Its validity is subject to verification by the Examination Department, SAB Campus of CA Sri Lanka.
                         </div>
                     </div>
                 )}
