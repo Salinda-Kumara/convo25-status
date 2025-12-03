@@ -1,5 +1,5 @@
 import { google } from 'googleapis';
-import { Student, DocumentStatus } from '@/types/student';
+import { Student, DocumentStatus, EligibilityData } from '@/types/student';
 
 // Initialize Google Sheets API
 export async function getGoogleSheetsClient() {
@@ -133,4 +133,49 @@ function normalizeStatus(value: string): DocumentStatus['status'] {
     if (normalized.includes('reject')) return 'Rejected';
 
     return 'Not Submitted';
+}
+
+// Fetch eligibility data from Mastersheet
+export async function fetchEligibilityData(): Promise<EligibilityData[]> {
+    try {
+        const sheets = await getGoogleSheetsClient();
+        const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+        const range = 'Mastersheet!A:Z'; // Hardcoded range for Mastersheet
+
+        const response = await sheets.spreadsheets.values.get({
+            spreadsheetId,
+            range,
+        });
+
+        const rows = response.data.values;
+
+        if (!rows || rows.length === 0) {
+            return [];
+        }
+
+        const eligibilityList: EligibilityData[] = [];
+
+        // Process each row (skip header)
+        for (let i = 1; i < rows.length; i++) {
+            const row = rows[i];
+
+            if (!row || row.length === 0) continue;
+
+            const student: EligibilityData = {
+                id: `eligibility-${i}`,
+                registrationNumber: row[1] || '', // Column B: Registration Number
+                name: row[2] || '', // Column C: Name
+                degreeType: row[3] || '', // Column D: Degree Type
+                gpa: row[4] || '', // Column E: GPA
+                classAward: row[5] || '', // Column F: Class Award
+            };
+
+            eligibilityList.push(student);
+        }
+
+        return eligibilityList;
+    } catch (error) {
+        console.error('Error fetching eligibility data:', error);
+        throw new Error('Failed to fetch eligibility data from Google Sheets');
+    }
 }

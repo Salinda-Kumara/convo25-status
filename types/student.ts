@@ -14,3 +14,12 @@ export interface DocumentStatus {
 }
 
 export type StatusType = 'Submitted' | 'Pending' | 'Approved' | 'Rejected' | 'Not Submitted' | 'Payment received' | 'Confirmed' | 'Not Paid';
+
+export interface EligibilityData {
+    id: string;
+    registrationNumber: string;
+    name: string;
+    degreeType: string; // General/Special
+    classAward: string;
+    gpa: string;
+}
