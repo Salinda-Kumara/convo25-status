@@ -95,6 +95,7 @@ export default function EligibilityPage() {
         <main className="main-layout">
             <Header
                 showNav={false}
+                showCountdown={false}
                 subtitle="2025 - Convocation Eligibility Check"
             />
 

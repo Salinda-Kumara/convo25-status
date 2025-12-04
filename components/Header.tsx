@@ -1,14 +1,17 @@
 'use client';
 
 import Link from 'next/link';
+import CountdownTimer from './CountdownTimer';
 
 interface HeaderProps {
     showNav?: boolean;
+    showCountdown?: boolean;
     subtitle?: string;
 }
 
 export default function Header({
     showNav = true,
+    showCountdown = true,
     subtitle = "Document Submission Status Portal"
 }: HeaderProps) {
     return (
@@ -22,13 +25,16 @@ export default function Header({
                         {subtitle}
                     </p>
                 </div>
-                {showNav && (
-                    <nav style={{ display: 'flex', gap: '16px' }}>
-                        <Link href="/eligibility" className="header-link">
-                            Eligibility List
-                        </Link>
-                    </nav>
-                )}
+                <div className="header-right">
+                    {showCountdown && <CountdownTimer />}
+                    {showNav && (
+                        <nav className="header-nav">
+                            <Link href="/eligibility" className="header-link">
+                                Eligibility List
+                            </Link>
+                        </nav>
+                    )}
+                </div>
             </div>
         </header>
     );

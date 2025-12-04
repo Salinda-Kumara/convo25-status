@@ -84,7 +84,7 @@ export default function Home() {
           </div>
 
           <a
-            href="https://sablms.casrilanka.com/course/view.php?id=3128"
+            href="https://sablms.casrilanka.com/course/index.php?categoryid=1045"
             target="_blank"
             rel="noopener noreferrer"
             className="submit-btn"
