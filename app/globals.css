@@ -688,55 +688,35 @@ body {
   background-color: #f8fafc;
 }
 
-/* Sticky columns for S. No and Registration No. */
-.data-table th:nth-child(1),
-.data-table th:nth-child(2) {
+/* Sticky column for S. No only */
+.data-table th:nth-child(1) {
   position: sticky;
+  left: 0;
   top: 0;
   z-index: 100;
   background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
   will-change: transform;
-}
-
-.data-table th:nth-child(1) {
-  left: 0;
   min-width: 80px;
-}
-
-.data-table th:nth-child(2) {
-  left: 80px;
-  min-width: 150px;
   box-shadow: 3px 0 5px -2px rgba(0, 0, 0, 0.2);
 }
 
-.data-table td:nth-child(1),
-.data-table td:nth-child(2) {
+.data-table td:nth-child(1) {
   position: sticky;
+  left: 0;
   z-index: 5;
   background-color: #ffffff;
   will-change: transform;
-}
-
-.data-table td:nth-child(1) {
-  left: 0;
   min-width: 80px;
-}
-
-.data-table td:nth-child(2) {
-  left: 80px;
-  min-width: 150px;
   box-shadow: 3px 0 5px -2px rgba(0, 0, 0, 0.15);
 }
 
-/* Maintain alternating row colors for sticky columns */
-.data-table tbody tr:nth-child(even) td:nth-child(1),
-.data-table tbody tr:nth-child(even) td:nth-child(2) {
+/* Maintain alternating row colors for sticky column */
+.data-table tbody tr:nth-child(even) td:nth-child(1) {
   background-color: #f8fafc;
 }
 
-/* Maintain hover effect for sticky columns */
-.data-table tbody tr:hover td:nth-child(1),
-.data-table tbody tr:hover td:nth-child(2) {
+/* Maintain hover effect for sticky column */
+.data-table tbody tr:hover td:nth-child(1) {
   background-color: #e0f2fe;
 }
 
@@ -761,16 +741,6 @@ body {
   .data-table th:nth-child(1),
   .data-table td:nth-child(1) {
     min-width: 60px;
-  }
-
-  .data-table th:nth-child(2) {
-    left: 60px;
-    min-width: 130px;
-  }
-
-  .data-table td:nth-child(2) {
-    left: 60px;
-    min-width: 130px;
   }
 
   .status-badge {
@@ -802,16 +772,6 @@ body {
   .data-table th:nth-child(1),
   .data-table td:nth-child(1) {
     min-width: 50px;
-  }
-
-  .data-table th:nth-child(2) {
-    left: 50px;
-    min-width: 110px;
-  }
-
-  .data-table td:nth-child(2) {
-    left: 50px;
-    min-width: 110px;
   }
 
   .status-badge {
